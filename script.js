@@ -21,13 +21,22 @@ try {
 
 // ==================== DOM元素 ====================
 const DOM = {
-    rsvpBtn: document.getElementById('rsvpBtn'),
-    modal: document.getElementById('modal'),
-    closeBtn: document.querySelector('.close'),
-    rsvpForm: document.getElementById('rsvpForm'),
-    successMessage: document.getElementById('successMessage'),
+    rsvpBtn: null,
+    modal: null,
+    closeBtn: null,
+    rsvpForm: null,
+    successMessage: null,
     submitBtn: null
 };
+
+// 初始化DOM元素引用
+function initDOM() {
+    DOM.rsvpBtn = document.getElementById('rsvpBtn');
+    DOM.modal = document.getElementById('modal');
+    DOM.closeBtn = document.querySelector('.close');
+    DOM.rsvpForm = document.getElementById('rsvpForm');
+    DOM.successMessage = document.getElementById('successMessage');
+}
 
 // ==================== 弹窗管理 ====================
 const Modal = {
@@ -311,6 +320,10 @@ const Gallery = {
 
 // ==================== 初始化 ====================
 document.addEventListener('DOMContentLoaded', () => {
+    // 先初始化DOM元素引用
+    initDOM();
+
+    // 然后初始化各个模块
     Modal.init();
     FormManager.init();
     Animation.init();
