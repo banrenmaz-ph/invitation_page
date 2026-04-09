@@ -1,7 +1,7 @@
 // 配置文件
 const CONFIG = {
     // Google Sheets配置
-    googleScriptUrl: 'YOUR_GOOGLE_SCRIPT_URL_HERE',
+    googleScriptUrl: 'https://script.google.com/macros/s/AKfycbxSNeNMOU5LRHFJQi9Qs-31rT7f-Kf7SFAXURTJyu1bfRTkxxhkDMmdwNjD5gpAgsvG/exec',
 
     // 活动信息
     event: {
