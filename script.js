@@ -25,6 +25,9 @@ window.addEventListener('click', function(event) {
     }
 });
 
+// Google Apps Script配置 - 请替换为你的部署URL
+const GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_SCRIPT_URL_HERE'; // 部署后获得的Web App URL
+
 // 表单提交
 rsvpForm.addEventListener('submit', function(e) {
     e.preventDefault();
@@ -34,7 +37,8 @@ rsvpForm.addEventListener('submit', function(e) {
         name: document.getElementById('name').value,
         phone: document.getElementById('phone').value,
         guests: document.getElementById('guests').value,
-        message: document.getElementById('message').value
+        message: document.getElementById('message').value,
+        timestamp: new Date().toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai' })
     };
 
     // 验证表单
@@ -50,20 +54,59 @@ rsvpForm.addEventListener('submit', function(e) {
         return;
     }
 
-    // 模拟提交（实际应用中应该发送到服务器）
-    console.log('提交的数据:', formData);
+    // 检查是否配置了Google Script URL
+    if (GOOGLE_SCRIPT_URL === 'YOUR_GOOGLE_SCRIPT_URL_HERE' || GOOGLE_SCRIPT_URL === '') {
+        console.warn('请先配置Google Apps Script URL！当前仅记录到控制台');
+        console.log('提交的数据:', formData);
 
-    // 关闭弹窗
-    modal.style.display = 'none';
+        // 开发模式下延迟1秒后显示成功
+        setTimeout(() => {
+            modal.style.display = 'none';
+            showSuccessMessage();
+            rsvpForm.reset();
+            document.body.style.overflow = 'auto';
+        }, 500);
+        return;
+    }
 
-    // 显示成功消息
-    showSuccessMessage();
+    // 禁用提交按钮，防止重复提交
+    const submitBtn = rsvpForm.querySelector('.submit-button');
+    submitBtn.disabled = true;
+    submitBtn.textContent = '提交中...';
 
-    // 重置表单
-    rsvpForm.reset();
+    // 发送数据到Google Sheets
+    fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors', // Google Apps Script要求
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+    })
+    .then(() => {
+        // no-cors模式下无法读取响应，但成功提交会返回200
 
-    // 恢复滚动
-    document.body.style.overflow = 'auto';
+        // 关闭弹窗
+        modal.style.display = 'none';
+
+        // 显示成功消息
+        showSuccessMessage();
+
+        // 重置表单
+        rsvpForm.reset();
+
+        // 恢复滚动
+        document.body.style.overflow = 'auto';
+    })
+    .catch(error => {
+        console.error('提交失败:', error);
+        alert('提交失败，请稍后重试或联系主办方');
+    })
+    .finally(() => {
+        // 恢复提交按钮
+        submitBtn.disabled = false;
+        submitBtn.textContent = '提交';
+    });
 });
 
 // 显示成功消息

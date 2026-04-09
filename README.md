@@ -21,8 +21,63 @@
 ## 使用方法
 
 1. 克隆或下载此仓库
-2. 在浏览器中打开 `index.html` 文件
-3. 自定义活动信息
+2. 配置Google Sheets表单收集（见下方配置说明）
+3. 在浏览器中打开 `index.html` 文件
+4. 自定义活动信息
+
+## Google Sheets配置
+
+### 步骤1: 创建Google Sheets表格
+
+1. 访问 [Google Sheets](https://sheets.new) 创建新表格
+2. 命名表格（例如：邀请函回复收集）
+
+### 步骤2: 部署Google Apps Script
+
+1. 在Google Sheets中，点击菜单栏的 **Extensions (扩展)** > **Apps Script**
+2. 删除默认代码，将 `Google-Apps-Script-Code.gs` 文件中的代码复制粘贴进去
+3. 点击 **Save (保存)** 图标
+4. 点击 **Deploy (部署)** > **New deployment (新建部署)**
+5. 点击齿轮图标 ⚙️，选择 **Web app (Web应用)**
+6. 填写配置：
+   - **Description (描述)**: 邀请函表单收集
+   - **Execute as (执行身份)**: Me (我/你的邮箱)
+   - **Who has access (访问权限)**: Anyone (任何人)
+7. 点击 **Deploy (部署)**
+8. 复制获得的 **Web app URL**（格式：`https://script.google.com/macros/s/...`）
+
+### 步骤3: 配置代码
+
+1. 打开 `script.js` 文件
+2. 找到第3行的 `GOOGLE_SCRIPT_URL` 常量
+3. 将 `'YOUR_GOOGLE_SCRIPT_URL_HERE'` 替换为你的Web app URL
+
+```javascript
+const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/your-script-id/exec';
+```
+
+### 步骤4: 初始化表格（可选）
+
+在Apps Script编辑器中：
+1. 选择函数 `formatSheet`
+2. 点击运行 ▶️
+3. 授权脚本访问你的Google Sheets
+4. 这会设置好表头和格式
+
+### 步骤5: 测试
+
+1. 打开 `index.html`
+2. 点击"确认参加"按钮
+3. 填写表单并提交
+4. 检查Google Sheets表格是否出现新数据
+
+**功能特点：**
+- ✅ 完全免费
+- ✅ 无限次提交
+- ✅ 数据实时更新到表格
+- ✅ 自动添加时间戳
+- ✅ 美观的表格格式
+- ✅ 可导出为Excel、CSV等格式
 
 ## 自定义内容
 
