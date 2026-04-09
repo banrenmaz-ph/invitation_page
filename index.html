@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>特别邀请函 | Special Invitation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 邀请函主体 -->
+        <div class="invitation-card">
+            <div class="envelope">
+                <div class="envelope-flap"></div>
+                <div class="envelope-body">
+                    <div class="invitation-content">
+                        <!-- 装饰元素 -->
+                        <div class="decoration corner top-left"></div>
+                        <div class="decoration corner top-right"></div>
+                        <div class="decoration corner bottom-left"></div>
+                        <div class="decoration corner bottom-right"></div>
+
+                        <!-- 标题 -->
+                        <header class="invitation-header">
+                            <h1 class="main-title">诚挚邀请</h1>
+                            <p class="subtitle">CORDIAL INVITATION</p>
+                            <div class="divider"></div>
+                        </header>
+
+                        <!-- 邀请内容 -->
+                        <div class="invitation-body">
+                            <div class="intro">
+                                <p class="greeting">亲爱的朋友：</p>
+                                <p class="message">
+                                    在这个特别的日子里，我们诚挚地邀请您参加即将举行的聚会。
+                                    您的到来将为我们的聚会增添无限光彩。
+                                </p>
+                            </div>
+
+                            <!-- 活动详情 -->
+                            <div class="event-details">
+                                <div class="detail-item">
+                                    <div class="icon">📅</div>
+                                    <div class="info">
+                                        <h3>时间</h3>
+                                        <p>2026年4月20日</p>
+                                        <p class="time">14:00 - 18:00</p>
+                                    </div>
+                                </div>
+
+                                <div class="detail-item">
+                                    <div class="icon">📍</div>
+                                    <div class="info">
+                                        <h3>地点</h3>
+                                        <p>上海市浦东新区</p>
+                                        <p class="location">陆家嘴金融中心</p>
+                                    </div>
+                                </div>
+
+                                <div class="detail-item">
+                                    <div class="icon">🎉</div>
+                                    <div class="info">
+                                        <h3>活动主题</h3>
+                                        <p>春日聚会 & 创意分享</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 活动流程 -->
+                            <div class="schedule">
+                                <h3>活动流程</h3>
+                                <ul class="schedule-list">
+                                    <li><span class="time">14:00</span> 签到 & 欢迎饮品</li>
+                                    <li><span class="time">14:30</span> 开场致辞</li>
+                                    <li><span class="time">15:00</span> 主题分享</li>
+                                    <li><span class="time">16:00</span> 茶歇 & 自由交流</li>
+                                    <li><span class="time">17:00</span> 互动游戏</li>
+                                    <li><span class="time">18:00</span> 结束 & 合影留念</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- 回复按钮 -->
+                        <div class="invitation-footer">
+                            <button class="rsvp-button" id="rsvpBtn">
+                                <span class="button-text">确认参加</span>
+                                <span class="button-icon">✓</span>
+                            </button>
+                            <p class="note">请在4月15日前回复</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 确认弹窗 -->
+        <div class="modal" id="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>确认参加</h2>
+                <form id="rsvpForm">
+                    <div class="form-group">
+                        <label for="name">姓名</label>
+                        <input type="text" id="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">联系电话</label>
+                        <input type="tel" id="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="guests">携带人数</label>
+                        <select id="guests">
+                            <option value="0">仅本人</option>
+                            <option value="1">携带1位</option>
+                            <option value="2">携带2位</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">留言</label>
+                        <textarea id="message" rows="3"></textarea>
+                    </div>
+                    <button type="submit" class="submit-button">提交</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- 成功提示 -->
+        <div class="success-message" id="successMessage">
+            <div class="success-content">
+                <div class="checkmark">✓</div>
+                <h3>提交成功！</h3>
+                <p>感谢您的确认，期待与您相见！</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
