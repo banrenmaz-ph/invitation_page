@@ -18,6 +18,19 @@
 - 表单验证
 - 友好的用户反馈
 
+🖼️ **图片展示**（新功能）
+- 支持添加活动相关图片
+- 网格布局展示
+- 点击放大查看
+- 灵活管理图片内容
+
+⚙️ **图片管理**（新功能）
+- 可视化配置编辑器
+- 添加/编辑/删除图片
+- 调整图片显示顺序
+- 生成配置代码
+- 配置随代码版本控制
+
 ## 使用方法
 
 1. 克隆或下载此仓库
@@ -112,6 +125,111 @@ const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/your-script-id/exe
 - 添加表单验证规则
 - 修改提交逻辑
 - 添加更多交互功能
+
+## 图片管理功能使用说明
+
+### 工作原理
+
+图片配置直接存储在 `config.js` 文件中，这意味着：
+- ✅ 配置随代码一起版本控制
+- ✅ 所有用户看到相同的图片
+- ✅ 修改后推送到 GitHub 即可更新
+- ✅ 简单可靠，无需后端
+
+### 方式一：使用可视化编辑器（推荐）
+
+1. 在浏览器中打开 `admin.html`
+2. 使用可视化界面添加、编辑、删除图片
+3. 调整图片显示顺序
+4. 点击"生成配置代码"按钮
+5. 复制生成的代码
+6. 打开 `config.js` 文件，找到 `gallery.images` 部分
+7. 用生成的代码替换原有的图片数组
+8. 保存文件并刷新邀请函页面查看效果
+
+**访问管理界面：**
+- 在邀请函页面右下角点击齿轮图标 ⚙️
+- 或直接在浏览器中打开 `admin.html`
+
+### 方式二：直接编辑配置文件
+
+直接编辑 `config.js` 文件中的 `gallery.images` 数组：
+
+```javascript
+gallery: {
+    // ... 其他配置
+    images: [
+        {
+            id: 1,
+            url: 'https://example.com/image1.jpg',
+            caption: '图片说明'
+        },
+        {
+            id: 2,
+            url: 'https://example.com/image2.jpg',
+            caption: '另一张图片'
+        }
+    ]
+}
+```
+
+**注意事项：**
+- 每张图片需要一个唯一的 `id`
+- `url` 必须是有效的图片链接
+- `caption` 是可选的图片说明
+- 添加或删除图片后记得保存文件
+
+### 图片URL来源建议
+
+- **免费图库**：Unsplash、Pexels、Pixabay
+- **图床服务**：imgur、Cloudinary
+- **自建服务器**：将图片放在自己的服务器上
+- **GitHub仓库**：可以将图片放在项目的 `images/` 目录中
+
+## 部署到 GitHub Pages
+
+1. 将项目推送到 GitHub 仓库
+2. 在仓库设置中启用 GitHub Pages
+3. 选择主分支作为发布源
+4. 访问 `https://你的用户名.github.io/invitation_page/`
+
+### 推送命令示例
+
+```bash
+# 初始化仓库（如果还没有）
+git init
+
+# 添加所有文件
+git add .
+
+# 提交更改
+git commit -m "更新图片配置"
+
+# 推送到 GitHub
+git push origin main
+```
+
+### 更新图片流程
+
+1. 在本地编辑 `config.js` 或使用 `admin.html` 生成配置
+2. 在浏览器中刷新页面验证效果
+3. 提交并推送到 GitHub
+4. 等待 GitHub Pages 自动部署（通常需要几秒钟）
+
+## 文件结构
+
+```
+invitation_page/
+├── index.html          # 主页面
+├── admin.html          # 图片管理界面（新增）
+├── styles.css          # 主页面样式
+├── admin.css           # 管理界面样式（新增）
+├── script.js           # 主页面交互
+├── admin.js            # 管理界面逻辑（新增）
+├── config.js           # 配置文件（新增）
+├── README.md           # 说明文档
+└── Google-Apps-Script-Code.gs  # Google Apps Script代码
+```
 
 ## 文件结构
 

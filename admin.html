@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片配置编辑器 | 配置管理</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="admin.css">
+    <script src="config.js"></script>
+</head>
+<body>
+    <div class="admin-container">
+        <!-- 头部 -->
+        <header class="admin-header">
+            <div>
+                <h1>📸 图片配置编辑器</h1>
+                <p class="subtitle">可视化编辑图片配置，生成代码后复制到 config.js</p>
+            </div>
+            <a href="index.html" class="back-btn">← 返回邀请函</a>
+        </header>
+
+        <!-- 使用说明 -->
+        <section class="admin-section usage-guide">
+            <h2>📖 使用说明</h2>
+            <ol class="steps">
+                <li>在下方的"图片列表"中添加、编辑、删除图片</li>
+                <li>调整图片的显示顺序（使用上移/下移按钮）</li>
+                <li>点击"生成配置代码"按钮</li>
+                <li>复制生成的代码</li>
+                <li>打开 <code>config.js</code> 文件，找到 <code>gallery.images</code> 部分</li>
+                <li>用生成的代码替换原有的图片配置数组</li>
+                <li>保存文件并刷新邀请函页面查看效果</li>
+            </ol>
+        </section>
+
+        <!-- 快速加载 -->
+        <section class="admin-section">
+            <h2>🚀 快速开始</h2>
+            <div class="action-buttons">
+                <button id="loadSampleBtn" class="btn btn-info">
+                    <span class="btn-icon">🔄</span>
+                    加载示例图片
+                </button>
+                <button id="loadCurrentBtn" class="btn btn-primary">
+                    <span class="btn-icon">📥</span>
+                    加载当前配置
+                </button>
+            </div>
+        </section>
+
+        <!-- 添加图片表单 -->
+        <section class="admin-section">
+            <h2>➕ 添加新图片</h2>
+            <form id="addImageForm" class="add-image-form">
+                <div class="form-group">
+                    <label for="imageUrl">图片URL *</label>
+                    <input type="url" id="imageUrl" placeholder="https://example.com/image.jpg" required>
+                    <small>支持在线图片链接（推荐使用 Unsplash、Pexels 等免费图库）</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="imageCaption">图片说明</label>
+                    <input type="text" id="imageCaption" placeholder="图片标题或描述（可选）">
+                    <small>鼠标悬停时显示的说明文字</small>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">
+                        <span class="btn-icon">➕</span>
+                        添加到列表
+                    </button>
+                    <button type="button" id="clearBtn" class="btn btn-secondary">
+                        <span class="btn-icon">🗑️</span>
+                        清空列表
+                    </button>
+                </div>
+            </form>
+        </section>
+
+        <!-- 图片列表 -->
+        <section class="admin-section">
+            <h2>📋 图片列表 (<span id="imageCount">0</span>)</h2>
+            <div id="imageList" class="image-list">
+                <!-- 图片将通过JS动态加载 -->
+            </div>
+            <div id="emptyState" class="empty-state" style="display: none;">
+                <p>暂无图片，请添加第一张图片或加载示例图片</p>
+            </div>
+        </section>
+
+        <!-- 生成配置 -->
+        <section class="admin-section generate-section">
+            <h2>🎯 生成配置代码</h2>
+            <p class="hint">编辑完图片列表后，点击下方按钮生成配置代码</p>
+            <div class="form-actions">
+                <button id="generateBtn" class="btn btn-success btn-large">
+                    <span class="btn-icon">✨</span>
+                    生成配置代码
+                </button>
+            </div>
+
+            <div id="codeOutput" style="display: none;">
+                <div class="code-header">
+                    <span>生成的配置代码：</span>
+                    <button id="copyCodeBtn" class="btn btn-small">
+                        <span class="btn-icon">📋</span>
+                        复制代码
+                    </button>
+                </div>
+                <pre id="codeBlock" class="code-block"></pre>
+                <div class="next-steps">
+                    <h3>下一步：</h3>
+                    <ol>
+                        <li>点击"复制代码"按钮</li>
+                        <li>打开项目中的 <code>config.js</code> 文件</li>
+                        <li>找到 <code>gallery.images: [ ... ]</code> 部分</li>
+                        <li>用复制的代码替换原有的图片数组</li>
+                        <li>保存文件（<code>Ctrl+S</code> 或 <code>Cmd+S</code>）</li>
+                        <li>刷新邀请函页面查看效果</li>
+                    </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- 图片资源推荐 -->
+        <section class="admin-section">
+            <h2>💡 免费图片资源推荐</h2>
+            <div class="resources">
+                <div class="resource-item">
+                    <h3>Unsplash</h3>
+                    <p>高质量免费图片，无需注册</p>
+                    <a href="https://unsplash.com" target="_blank">访问网站 →</a>
+                </div>
+                <div class="resource-item">
+                    <h3>Pexels</h3>
+                    <p>免费 stock photos 和视频</p>
+                    <a href="https://www.pexels.com" target="_blank">访问网站 →</a>
+                </div>
+                <div class="resource-item">
+                    <h3>Pixabay</h3>
+                    <p>超过 200 万张免费图片</p>
+                    <a href="https://pixabay.com" target="_blank">访问网站 →</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- 编辑弹窗 -->
+    <div class="modal" id="editModal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>编辑图片</h2>
+            <form id="editImageForm">
+                <input type="hidden" id="editImageId">
+                <div class="form-group">
+                    <label for="editImageUrl">图片URL</label>
+                    <input type="url" id="editImageUrl" required>
+                </div>
+                <div class="form-group">
+                    <label for="editImageCaption">图片说明</label>
+                    <input type="text" id="editImageCaption">
+                </div>
+                <button type="submit" class="btn btn-primary">保存修改</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- 成功提示 -->
+    <div class="toast" id="toast"></div>
+
+    <script src="admin.js"></script>
+</body>
+</html>

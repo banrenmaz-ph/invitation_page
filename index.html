@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>特别邀请函 | Special Invitation</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="config.js"></script>
 </head>
 <body>
     <div class="container">
@@ -78,6 +79,14 @@
                                     <li><span class="time">18:00</span> 结束 & 合影留念</li>
                                 </ul>
                             </div>
+
+                            <!-- 图片展示 -->
+                            <div class="gallery-section">
+                                <h3>精彩瞬间</h3>
+                                <div class="gallery-container" id="galleryContainer">
+                                    <!-- 图片将通过JS动态加载 -->
+                                </div>
+                            </div>
                         </div>
 
                         <!-- 回复按钮 -->
@@ -91,6 +100,11 @@
                     </div>
                 </div>
             </div>
+        </div>
+
+        <!-- 管理入口 -->
+        <div class="admin-entry">
+            <a href="admin.html" title="管理图片">⚙️</a>
         </div>
 
         <!-- 确认弹窗 -->
