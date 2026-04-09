@@ -1,4 +1,6 @@
 // ==================== 配置加载 ====================
+console.log('🔧 script.js 开始加载...');
+
 let CONFIG;
 try {
     CONFIG = window.CONFIG || {
@@ -15,8 +17,9 @@ try {
             phoneRegex: /^1[3-9]\d{9}$/
         }
     };
+    console.log('✅ CONFIG 加载成功:', CONFIG);
 } catch (e) {
-    console.warn('配置文件未加载，使用默认配置');
+    console.warn('⚠️ 配置文件未加载，使用默认配置');
 }
 
 // ==================== DOM元素 ====================
@@ -31,11 +34,27 @@ const DOM = {
 
 // 初始化DOM元素引用
 function initDOM() {
+    console.log('🔧 initDOM() 开始执行...');
+
     DOM.rsvpBtn = document.getElementById('rsvpBtn');
     DOM.modal = document.getElementById('modal');
     DOM.closeBtn = document.querySelector('.close');
     DOM.rsvpForm = document.getElementById('rsvpForm');
     DOM.successMessage = document.getElementById('successMessage');
+
+    console.log('DOM元素获取结果:', {
+        rsvpBtn: DOM.rsvpBtn,
+        modal: DOM.modal,
+        closeBtn: DOM.closeBtn,
+        rsvpForm: DOM.rsvpForm,
+        successMessage: DOM.successMessage
+    });
+
+    if (!DOM.rsvpBtn) {
+        console.error('❌ 无法找到 rsvpBtn 元素！');
+    } else {
+        console.log('✅ rsvpBtn 元素找到:', DOM.rsvpBtn);
+    }
 }
 
 // ==================== 弹窗管理 ====================
@@ -51,8 +70,21 @@ const Modal = {
     },
 
     init() {
-        DOM.rsvpBtn.addEventListener('click', () => this.open());
+        console.log('🔧 Modal.init() 开始执行...');
+
+        if (!DOM.rsvpBtn) {
+            console.error('❌ 无法初始化Modal - rsvpBtn为null');
+            return;
+        }
+
+        DOM.rsvpBtn.addEventListener('click', () => {
+            console.log('✅ 按钮被点击了！');
+            this.open();
+        });
+        console.log('✅ rsvpBtn 点击事件已绑定');
+
         DOM.closeBtn.addEventListener('click', () => this.close());
+        console.log('✅ closeBtn 点击事件已绑定');
 
         window.addEventListener('click', (event) => {
             if (event.target === DOM.modal) {
@@ -65,6 +97,8 @@ const Modal = {
                 this.close();
             }
         });
+
+        console.log('✅ Modal.init() 完成');
     }
 };
 
@@ -319,13 +353,16 @@ const Gallery = {
 };
 
 // ==================== 初始化 ====================
-document.addEventListener('DOMContentLoaded', () => {
-    // 先初始化DOM元素引用
-    initDOM();
+// script.js 在 body 底部加载，此时 DOM 已就绪，直接初始化
+console.log('✅ 开始初始化...');
 
-    // 然后初始化各个模块
-    Modal.init();
-    FormManager.init();
-    Animation.init();
-    Gallery.init();
-});
+// 先初始化DOM元素引用
+initDOM();
+
+// 然后初始化各个模块
+console.log('开始初始化各个模块...');
+Modal.init();
+FormManager.init();
+Animation.init();
+Gallery.init();
+console.log('✅ 所有模块初始化完成');

@@ -47,7 +47,7 @@ const CONFIG = {
         gridColumns: 3,
         enableLightbox: true,
         // 图片列表 - 可以直接在这里添加/修改/删除图片
-                images: [
+        images: [
             {
                 id: 1,
                 url: 'https://images.unsplash.com/photo-1519225421980-715cb0202128?w=600',
@@ -74,6 +74,5 @@ const CONFIG = {
                 caption: '音乐节'
             }
         ]
-        
     }
 };

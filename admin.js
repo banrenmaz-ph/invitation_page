@@ -354,8 +354,9 @@ const FormHandler = {
 };
 
 // ==================== 初始化 ====================
-document.addEventListener('DOMContentLoaded', () => {
-    EditModal.init();
-    FormHandler.init();
-    ConfigEditor.render();
-});
+// admin.js 在 body 底部加载，此时 DOM 已就绪，直接初始化
+console.log('✅ Admin 页面初始化开始...');
+EditModal.init();
+FormHandler.init();
+ConfigEditor.render();
+console.log('✅ Admin 页面初始化完成');
