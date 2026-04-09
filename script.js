@@ -2,7 +2,7 @@
 let CONFIG;
 try {
     CONFIG = window.CONFIG || {
-        googleScriptUrl: 'YOUR_GOOGLE_SCRIPT_URL_HERE',
+        googleScriptUrl: 'https://script.google.com/macros/s/AKfycbxSNeNMOU5LRHFJQi9Qs-31rT7f-Kf7SFAXURTJyu1bfRTkxxhkDMmdwNjD5gpAgsvG/exec',
         animation: {
             pageLoadDelay: 100,
             detailItemStartDelay: 500,
